@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import AddMessage from './AddMessage';
+import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const users = [{userName : "Azher"} , {message : "Good App"}]
+
+class App extends React.Component{
+  state = {
+    message : [],
+    
+  }
+onMessage = (userName , message) => {
+      const newMessage = {
+        ['userName'] : userName,
+        ['message'] : message      
+    }
+    this.setState(currState => ({
+      message : currState.message.concat([newMessage])
+    }))
+    console.log(newMessage)
+  }
+
+  
+  render(){
+    
+    return (
+      <div className="App">
+        <div className="container">
+        <AddMessage onMessage={this.onMessage}/>
+        </div>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
