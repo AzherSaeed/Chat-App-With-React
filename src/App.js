@@ -17,7 +17,6 @@ onMessage = (userName , message) => {
     this.setState(currState => ({
       messages : currState.messages.concat([newMessage])
     }))
-    console.log(newMessage)
   }
 
   
