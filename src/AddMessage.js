@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 
 class AddMessage extends React.Component{
     state = {
@@ -7,7 +9,6 @@ class AddMessage extends React.Component{
 
     handleMessage = event => {
         const value = event.target.value
-        
         this.setState(() => ({
             message : value
         }))
@@ -18,22 +19,31 @@ class AddMessage extends React.Component{
         this.props.onMessage(this.state.message)
         // console.log(this.state.message)
     }
+    isDisabled = () => {
+        return this.state.message === ''
+    }
     
     render(){
         
         return (
             <div>
-                <h1>Chat App</h1>
-                <form onSubmit={this.handleInput} >
+                <form onSubmit={this.handleInput} className="input-group" >
                     <input type="text" placeholder="Send you thoughts..."
                     value={this.state.message}
                     onChange={this.handleMessage}
+                    className="form-control"
                     />
-                    <button type="submit">Send</button>
+                    <div className="input-group-append">
+                    <button disabled={this.isDisabled()} className="btn submit-button">Send</button>
+                    </div>
+                    
                 </form>
             </div>
         )
     }
+}
+AddMessage.prototypes= {
+    onMessage : PropTypes.func.isRequired,
 }
 
 export default AddMessage;

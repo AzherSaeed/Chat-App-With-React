@@ -12,7 +12,7 @@ class App extends React.Component{
 onMessage = (userName , message) => {
       const newMessage = {
         ['userName'] : userName,
-        ['message'] : message      
+        ['text'] : message      
     }
     this.setState(currState => ({
       messages : currState.messages.concat([newMessage])
@@ -25,13 +25,16 @@ onMessage = (userName , message) => {
     const { messages } = this.state;
     return (
       <div className="App">
-        {users.map(user => (
-           <ChatWindow 
-           key={user.userName}
-           user={user}
-          onMessage={this.onMessage}
-           messages={messages} />
-        ))}
+       <div className="container">
+          {users.map(user => (
+            <ChatWindow
+              key={user.username}
+              user={user}
+              messages={messages}
+              onMessage={this.onMessage}
+            />
+          ))}
+        </div>
         
       </div>
     );
