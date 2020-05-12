@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import AddMessage from './AddMessage';
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
+import ChatWindow from './ChatWindow'
 
-const users = [{userName : "Azher"} , {message : "Good App"}]
+const users = [{userName : "Azher"} , {userName : "Saeed"}]
 
 class App extends React.Component{
   state = {
-    message : [],
+    messages : [],
     
   }
 onMessage = (userName , message) => {
@@ -16,19 +15,24 @@ onMessage = (userName , message) => {
         ['message'] : message      
     }
     this.setState(currState => ({
-      message : currState.message.concat([newMessage])
+      messages : currState.message.concat([newMessage])
     }))
     console.log(newMessage)
   }
 
   
   render(){
-    
+    const { messages } = this.state;
     return (
       <div className="App">
-        <div className="container">
-        <AddMessage onMessage={this.onMessage}/>
-        </div>
+        {users.map(user => (
+           <ChatWindow 
+           key={user.userName}
+           user={user}
+          onMessage={this.onMessage}
+           messages={messages} />
+        ))}
+        
       </div>
     );
   }
