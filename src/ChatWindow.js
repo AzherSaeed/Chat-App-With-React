@@ -1,16 +1,32 @@
 import React, { useReducer } from 'react';
 import AddMessage from './AddMessage'
+import MessageHistory from './MessageHistory';
 
-const ChatWindow = (props) => {
-    const {user} = props
-    return(
-        <div>
+class ChatWindow extends React.Component {
+    
+    onMessage = message => {
+        this.props.onMessage(this.props.user.userName , message)
+    }
 
-            <p>{user.userName}</p>
-            <AddMessage/>
+    render(){
+        const {user , messages} = this.props
+        return(
+            <div>
+    
+                <p>{user.userName}</p>
+                <AddMessage onMessage={this.onMessage}/>
+                <MessageHistory messages={messages} user={user}/>
+    
+            </div>
+        )
 
-        </div>
-    )
+    }
+   
+
+  
+    
+    
+  
 }
 
 export default ChatWindow;

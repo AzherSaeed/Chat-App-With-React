@@ -7,6 +7,7 @@ class AddMessage extends React.Component{
 
     handleMessage = event => {
         const value = event.target.value
+        
         this.setState(() => ({
             message : value
         }))
@@ -19,7 +20,7 @@ class AddMessage extends React.Component{
     }
     
     render(){
-       
+        
         return (
             <div>
                 <h1>Chat App</h1>
